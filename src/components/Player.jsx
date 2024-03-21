@@ -4,7 +4,6 @@ import PauseIcon from "../assets/icons/PauseIcon";
 import ResetIcon from "../assets/icons/ResetIcon";
 import Button from "./Button";
 
-
 const Player = (props) => {
   const mediaRef = useRef(null);
   const [volume, setVolume] = useState(0.5);
@@ -51,19 +50,13 @@ const Player = (props) => {
 
       <section className="card-actions justify-center p-5">
         <div className="flex flex-row justify-center items-center gap-2">
-          {!isPlaying ? (
-            <Button click={play}>
-              <PlayIcon fill="white" />
-            </Button>
-          ) : (
-            <Button click={pause}>
-              <PauseIcon />
-            </Button>
-          )}
+          <Button click={!isPlaying ? play : pause}>
+            {!isPlaying ? <PlayIcon /> : <PauseIcon />}
+          </Button>
 
-          <button className="btn btn-circle" onClick={stop}>
+          <Button click={stop}>
             <ResetIcon />
-          </button>
+          </Button>
 
           <input
             className="range range-info"
