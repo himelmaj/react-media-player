@@ -1,16 +1,19 @@
 import Player from "./components/Player";
-import video from "./assets/video.mp4";
-import audio from "./assets/audio.mp3";
-
 import { useRef, useState } from "react";
 
 const App = () => {
   const [media, setMedia] = useState(null);
 
   const handleChoose = (e) => {
-    setMedia(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files[0];
+    const src = URL.createObjectURL(file);
+    const type = file.type;
+    const name = file.name;
+
+    setMedia({ src, type, name });
   };
 
+  console.log(media);
   const handleReset = () => {
     setMedia(null);
   };
@@ -26,11 +29,10 @@ const App = () => {
         />
       ) : (
         <div className="flex flex-col gap-2">
-          <Player
-            src={media}
-            type={media.includes("mp4") ? "video" : "audio"}
-          />
-          <button className="btn btn-info" onClick={handleReset}>Reset</button>
+          <Player {...media} />
+          <button className="btn btn-info" onClick={handleReset}>
+            Reset
+          </button>
         </div>
       )}
     </div>
