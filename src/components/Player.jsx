@@ -42,7 +42,7 @@ const Player = (props) => {
           <>
             <h2 className="card-title truncate w-30">{props.name}</h2>
             <video ref={mediaRef} controls={false}>
-              <source src={props.src} type="video/mp4" />
+              <source src={props.src} type={props.type} />
             </video>
           </>
         )}
